@@ -1,0 +1,84 @@
+This doc focuses on how to survive in a bare emacs session with no config,
+especially for folks like me whose normal setup is far-removed from bare emacs
+(e.g. any evil user would tend to rely on vim commands.
+
+I got much of this material from [[https://www.youtube.com/watch?v=48JlgiBpw_I&list=PLEoMzSkcN8oPZvSdewHG8uApD7THlLLCV][System Crafters Beginner's Guide]].
+
+Launching emacs
+* For GUI emacs on OSX, you want `emacs &`
+* For terminal emacs, in a setting where GUI is the default, use `emacs -nw`
+
+
+Livable colors using the bare (OSX) emacs install:
+* I find the default colors painful to stare at. You can use =M-x custom-themes= to explore color themes 
+* I like misterioso, you can use =M-x load-theme \ misterioso= to pull it up
+
+
+Absolute bare survival
+* In general, M-x is how you run arbitrary commands by name; this is handy if you usually rely on custom keybindings.
+* C-g will exit a partially-complete command. Just hit it many times if you find yourself somewhere weird.
+* M-x customize will take you to a GUI for customizing basic settings. Not useful for a real setup, but maybe as a one-off in a bare emacs.
+
+Vim user survival - escape does confusing things by default:
+* This may help vim users: =(global-set-key (kbd "<escape>") 'keyboard-escape-quit)=
+* You can run it manually with =M-x global-set-key \ ESCAPE \ keyboard-escape-quit=
+
+
+Most basic file commands:
+* C-x C-f to load a file
+* C-x C-d to look at a directory (in dired)
+* C-x C-c to exit (it will prompt you to save all files)
+* C-x C-s to save file
+
+Most basic buffer commands:
+* C-x b lets you switch to a buffer by name, with tab completion
+* C-x C-b lets you select a buffer to open from a listing in the minibuffer
+* C-x LEFT, C-x RIGHT let you cycle through buffers
+
+Basic navigation
+* C-a, C-e should be familiar
+* C-s, C-r do forward, reverse incremental search
+* in general, f = forward, b = backward, n = next, p = previous
+* M-f / M-b moves forward/backward one word at a time
+* M-{ / M-} (with shift!) let you move a "paragraph" (mode-dependent) at a time
+* C-n / C-p goes to next/previous line (but I usually use arrows)
+* M-< / M-> jump to top/bottom of buffer (yes, the shift is necessary)
+* M-g M-g to go to line (use M-x display-line-numbers-mode)
+
+Basic editing
+* C-a C-k and then C-y is handy for moving lines around
+* C-x u OR C-/ is undo, *very* important if you are not used to a set of keybindings!
+
+Mark handling
+* C-SPC sets the mark
+* C-x C-x is exchange-point-and-mark 
+* many commands act on whatever lives between mark and point (cursor)
+* e.g. C-w kills the selection
+
+Getting help:
+* if you want help and aren't sure which function to use, do M-x describe-TAB!
+* C-h C-h pulls up general help
+* C-h k will let you type a key sequence and tell you what it binds to
+* <PREFIX> C-h finds all bindings after PREFIX (e.g. C-x C-h)
+
+
+Terminology:
+* frame = a system window. Normally frames share the same editor session
+* window = a pane in a frame
+* buffer = a block of text, usually tied to a file but not always
+* minibuffer = the special tiny buffer at the bottom of the screen, used by commands
+* major mode = the one "basic" mode used at a time for a buffer
+* minor mode = one of many possible extensions. By default, applied per buffer but can be global.
+
+
+Modifier keys in symbols:
+* C = control
+* M = meta (option)
+* S = shift
+* s = super (windows / command)
+
+
+
+
+More navigation commands.
+
