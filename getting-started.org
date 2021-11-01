@@ -2,17 +2,22 @@ This doc focuses on how to survive in a bare emacs session with no config,
 especially for folks like me whose normal setup is far-removed from bare emacs
 (e.g. any evil user would tend to rely on vim commands.
 
-I got much of this material from [[https://www.youtube.com/watch?v=48JlgiBpw_I&list=PLEoMzSkcN8oPZvSdewHG8uApD7THlLLCV][System Crafters Beginner's Guide]].
+I got much of this material from [[https://www.youtube.com/watch?v=48JlgiBpw_I&list=PLEoMzSkcN8oPZvSdewHG8uApD7THlLLCV][System Crafters Beginner's Guide]] and the
+two following videos on basic navigation.
 
 Launching emacs
 * For GUI emacs on OSX, you want `emacs &`
 * For terminal emacs, in a setting where GUI is the default, use `emacs -nw`
 
 
-Livable colors using the bare (OSX) emacs install:
+Livable UI using the bare (OSX) emacs install:
 * I find the default colors painful to stare at. You can use =M-x custom-themes= to explore color themes 
 * I like misterioso, you can use =M-x load-theme \ misterioso= to pull it up
+* =M-x tool-bar-mode= will hide the toolbar
 
+M-x lets you run commands
+* Important tip: you can tab complete on any partial match to command name
+* e.g. M-x -regionTAB will give you all the commands that work on regions
 
 Absolute bare survival
 * In general, M-x is how you run arbitrary commands by name; this is handy if you usually rely on custom keybindings.
@@ -37,10 +42,12 @@ Most basic buffer commands:
 
 Basic navigation
 * C-a, C-e should be familiar
-* C-s, C-r do forward, reverse incremental search
+* C-s, C-r do forward, reverse incremental search (repeat it to iterate)
+** Note: this replaces both "big" and "line" style search from vim
 * in general, f = forward, b = backward, n = next, p = previous
 * M-f / M-b moves forward/backward one word at a time
-* M-{ / M-} (with shift!) let you move a "paragraph" (mode-dependent) at a time
+* M-{ / M-} (with shift) let you move a "paragraph" (mode-dependent) at a time
+* M-a / M-e move by expression; in practice this is often nicer than paragraphs
 * C-n / C-p goes to next/previous line (but I usually use arrows)
 * M-< / M-> jump to top/bottom of buffer (yes, the shift is necessary)
 * M-g M-g to go to line (use M-x display-line-numbers-mode)
@@ -49,11 +56,26 @@ Basic editing
 * C-a C-k and then C-y is handy for moving lines around
 * C-x u OR C-/ is undo, *very* important if you are not used to a set of keybindings!
 
+Scrolling
+* PGUP and PGDN work fine
+* C-l will do point-based scrolling, you can cycle it. C-M-l is also useful
+
 Mark handling
-* C-SPC sets the mark
+* C-SPC / C-@ both set the mark
 * C-x C-x is exchange-point-and-mark 
 * many commands act on whatever lives between mark and point (cursor)
-* e.g. C-w kills the selection
+* e.g. C-w kills the selection, M-w just copies it into the kill ring
+* The mark ring consists of deactivated marks (e.g. C-SPC C-SPC
+* You can pop from the mark ring with C-u C-SPC
+** Popping rotates the ring, it doesn't delete the top element
+* There are many other ways to select groupings. Some particular examples:
+** M-h selects paragraph, repeating it selects more moving down
+** M-C-h will select the current paragrah and one above
+
+The kill ring
+* Kills also go into a ring (like marks)
+* C-y yanks the most recent killed snippet
+* But running M-y immediately after C-y will rotate through kill ring
 
 Getting help:
 * if you want help and aren't sure which function to use, do M-x describe-TAB!
@@ -69,7 +91,8 @@ Terminology:
 * minibuffer = the special tiny buffer at the bottom of the screen, used by commands
 * major mode = the one "basic" mode used at a time for a buffer
 * minor mode = one of many possible extensions. By default, applied per buffer but can be global.
-
+* M-f / M-b moves forward/backward one word at a time
+* kill means delete, kill ring is stuff deleted or copied. Yank is paste.
 
 Modifier keys in symbols:
 * C = control
